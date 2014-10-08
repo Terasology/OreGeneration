@@ -22,4 +22,6 @@ public interface CustomOreGenCreator {
      * Called at rasterize time
      */
     Block getReplacementBlock(StructureNodeType structureNodeType);
+
+    int getSalt();
 }

@@ -51,15 +51,17 @@ public class DepthPocketOreGenComponent implements Component, CustomOreGenCreato
 
         // see if this region is even in range of this ore gen
         PDist depthDist = new PDist(depth, depthRange);
-        if (depthDist.getMin() < averageSurfaceHeight - region.getRegion().maxY()
-                || depthDist.getMax() > averageSurfaceHeight - region.getRegion().minY()) {
+        float depthMaxY = averageSurfaceHeight - depthDist.getMin();
+        float depthMinY = averageSurfaceHeight - depthDist.getMax();
+        if (depthMaxY < region.getRegion().minY()
+                || depthMinY > region.getRegion().maxY()) {
             // shortcut early, this region is completely out of range
             return null;
         }
 
 
         // generate structures for the whole chunk, let the densityFacet filter out the depth stuff
-        float amountOfDepthRangeCovered = region.getRegion().sizeY() / depthRange;
+        float amountOfDepthRangeCovered = (float) region.getRegion().sizeY() / (depthRange * 2);
         StructureDefinition structureDefinition = new PocketStructureDefinition(
                 new PDist(frequency * amountOfDepthRangeCovered, frequencyRange * amountOfDepthRangeCovered), new PDist(radius, radiusRange), new PDist(thickness, thicknessRange),
                 new PDist(region.getRegion().sizeY() / 2, region.getRegion().sizeY() / 2), new PDist(angle, angleRange),
@@ -81,5 +83,10 @@ public class DepthPocketOreGenComponent implements Component, CustomOreGenCreato
     public Block getReplacementBlock(StructureNodeType structureNodeType) {
         BlockManager blockManager = CoreRegistry.get(BlockManager.class);
         return blockManager.getBlock(block);
+    }
+
+    @Override
+    public int getSalt() {
+        return block.hashCode();
     }
 }
