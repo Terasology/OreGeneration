@@ -49,7 +49,7 @@ public class OreFacetProvider implements FacetProviderPlugin {
         for (final CustomOreGenCreator creator : oreGenRegistrySystem.iterateDefinitions()) {
             StructureDefinition structureDefinition = creator.createStructureDefinition(region);
             if (structureDefinition != null) {
-                Collection<Structure> structures = structureDefinition.generateStructures(seed, region.getRegion());
+                Collection<Structure> structures = structureDefinition.generateStructures(seed + creator.getSalt(), region.getRegion());
 
                 for (Structure structure : structures) {
                     structure.generateStructure(new Structure.StructureCallback() {
