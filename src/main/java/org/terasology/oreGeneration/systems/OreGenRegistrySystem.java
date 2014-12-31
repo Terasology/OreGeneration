@@ -25,7 +25,7 @@ import org.terasology.entitySystem.prefab.PrefabData;
 import org.terasology.entitySystem.prefab.PrefabManager;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterSystem;
-import org.terasology.logic.console.Command;
+import org.terasology.logic.console.commands.referenced.CommandDefinition;
 import org.terasology.oreGeneration.components.CustomOreGenCreator;
 import org.terasology.oreGeneration.components.OreGenDefinitionComponent;
 import org.terasology.registry.CoreRegistry;
@@ -64,7 +64,7 @@ public class OreGenRegistrySystem extends BaseComponentSystem {
     }
 
 
-    @Command(shortDescription = "Reloads the ore gen registry")
+    @CommandDefinition(shortDescription = "Reloads the ore gen registry")
     public String reloadOreGenRegistry() {
         String message = "";
         for (Prefab prefab : prefabManager.listPrefabs(OreGenDefinitionComponent.class)) {
