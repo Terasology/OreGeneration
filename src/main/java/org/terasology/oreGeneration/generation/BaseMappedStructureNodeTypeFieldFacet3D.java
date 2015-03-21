@@ -19,7 +19,7 @@ import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
 import org.terasology.customOreGen.StructureNodeType;
 import org.terasology.math.Region3i;
-import org.terasology.math.Vector3i;
+import org.terasology.math.geom.Vector3i;
 import org.terasology.oreGeneration.components.CustomOreGenCreator;
 import org.terasology.oreGeneration.generation.MappedStructureNodeTypeFieldFacet3D;
 import org.terasology.world.generation.Border3D;

@@ -17,7 +17,7 @@ package org.terasology.oreGeneration.components;
 
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
-import org.terasology.math.Vector3i;
+import org.terasology.math.geom.Vector3i;
 import org.terasology.world.block.Block;
 import org.terasology.world.generation.GeneratingRegion;
 import org.terasology.world.generation.Region;

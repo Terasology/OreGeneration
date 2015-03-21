@@ -16,7 +16,7 @@
 package org.terasology.oreGeneration.generation;
 
 import org.terasology.customOreGen.StructureNodeType;
-import org.terasology.math.Vector3i;
+import org.terasology.math.geom.Vector3i;
 import org.terasology.oreGeneration.components.CustomOreGenCreator;
 import org.terasology.world.generation.WorldFacet3D;
 
