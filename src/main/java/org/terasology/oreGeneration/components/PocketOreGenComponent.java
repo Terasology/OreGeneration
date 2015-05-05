@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 MovingBlocks
+ * Copyright 2015 MovingBlocks
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,7 +16,10 @@
 package org.terasology.oreGeneration.components;
 
 import org.terasology.customOreGen.PDist;
+import org.terasology.customOreGen.PocketStructureDefinition;
+import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
+import org.terasology.entitySystem.Component;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.world.block.Block;
@@ -26,11 +29,42 @@ import org.terasology.world.generation.Region;
 import org.terasology.world.generation.facets.DensityFacet;
 import org.terasology.world.generation.facets.SurfaceHeightFacet;
 
-public class DepthPocketOreGenComponent extends PocketOreGenComponent {
-    public int depth;
-    public int depthRange;
+public class PocketOreGenComponent implements Component, CustomOreGenCreator {
+    public String block;
+    // frequency for every 10 cubed blocks
+    public float frequency = 1f;
+    public float frequencyRange;
+    public float radius = 2f;
+    public float radiusRange = 1f;
+    public float thickness = 6f;
+    public float thicknessRange = 3f;
+    public float angle = 1f;
+    public float angleRange = 1f;
+    public float multiplier = 1f;
+    public float multiplierRange;
+    public float density = 0.7f;
+    public float densityRange = 0.2f;
+    public float noiseLevel = 0.2f;
+    public float noiseLevelRange = 0.2f;
+    public float noiseCutoff;
+    public float noiseCutoffRange;
+    // This is the density at which ore generation will stop generating. Useful to prevent generating ores above the surface
+    public int densityCutoff = 2;
 
     @Override
+    public StructureDefinition createStructureDefinition(GeneratingRegion region) {
+        if (!isInRange(region)) {
+            return null;
+        }
+
+        Vector3i regionSize = region.getRegion().size();
+        float scaleFactor = regionSize.getY() / 10f;
+
+        StructureDefinition structureDefinition = getStructureDefinition(region, scaleFactor);
+
+        return structureDefinition;
+    }
+
     protected boolean isInRange(GeneratingRegion region) {
         // find the average surface height
         SurfaceHeightFacet surfaceHeightFacet = region.getRegionFacet(SurfaceHeightFacet.class);
@@ -44,19 +78,27 @@ public class DepthPocketOreGenComponent extends PocketOreGenComponent {
         float averageSurfaceHeight = total / (values.length / sampleRate);
 
         // see if this region is even in range of this ore gen
-        PDist depthDist = new PDist(depth, depthRange);
-        float depthMaxY = averageSurfaceHeight - depthDist.getMin();
-        float depthMinY = averageSurfaceHeight - depthDist.getMax();
+        return region.getRegion().minY() < averageSurfaceHeight;
+    }
 
-        return depthMaxY > region.getRegion().minY() || depthMinY > region.getRegion().maxY();
+    private StructureDefinition getStructureDefinition(GeneratingRegion region, float scaleFactor) {
+        return new PocketStructureDefinition(
+                new PDist(frequency * scaleFactor, frequencyRange * scaleFactor),
+                new PDist(radius, radiusRange),
+                new PDist(thickness, thicknessRange),
+                new PDist(region.getRegion().sizeY() / 2, region.getRegion().sizeY() / 2),
+                new PDist(angle, angleRange),
+                new PDist(multiplier, multiplierRange),
+                new PDist(density, densityRange),
+                new PDist(noiseLevel, noiseLevelRange),
+                new PDist(noiseCutoff, noiseCutoffRange));
     }
 
     @Override
     public boolean canReplaceBlock(Vector3i worldPosition, Region region) {
         DensityFacet densityFacet = region.getFacet(DensityFacet.class);
         float densityFacetValue = densityFacet.getWorld(worldPosition);
-        PDist depthDist = new PDist(depth, depthRange);
-        return densityFacetValue > depthDist.getMin() && densityFacetValue < depthDist.getMax();
+        return densityFacetValue > densityCutoff;
     }
 
     @Override
