@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 MovingBlocks
+ * Copyright 2015 MovingBlocks
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -25,7 +25,7 @@ import org.terasology.world.generation.Region;
 import org.terasology.world.generation.facets.DensityFacet;
 import org.terasology.world.generation.facets.SurfaceHeightFacet;
 
-public class DepthPocketOreGenComponent extends PocketOreGenComponent {
+public class DepthVeinsOreGenComponent extends VeinsOreGenComponent {
     public int minDepth;
     public int maxDepth;
 
@@ -33,7 +33,7 @@ public class DepthPocketOreGenComponent extends PocketOreGenComponent {
     protected boolean isInRange(GeneratingRegion region) {
         // find the average surface height
         SurfaceHeightFacet surfaceHeightFacet = region.getRegionFacet(SurfaceHeightFacet.class);
-        float averageSurfaceHeight = getAverageSurfaceHeight(surfaceHeightFacet);
+        float averageSurfaceHeight = PocketOreGenComponent.getAverageSurfaceHeight(surfaceHeightFacet);
         // see if this region is even in range of this ore gen
         float depthMaxY = averageSurfaceHeight - minDepth;
         float depthMinY = averageSurfaceHeight - maxDepth;
