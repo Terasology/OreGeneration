@@ -62,9 +62,9 @@ public class OreGenRegistrySystem extends BaseComponentSystem {
     @Command(shortDescription = "Reloads the ore gen registry")
     public String reloadOreGenRegistry() {
         String message = "";
-        for (Prefab prefab : prefabManager.listPrefabs(OreGenDefinitionComponent.class)) {
+        /*for (Prefab prefab : prefabManager.listPrefabs(OreGenDefinitionComponent.class)) {
             message += reloadPrefab(prefab.getName());
-        }
+        }*/
         createRegistry();
         return message;
     }

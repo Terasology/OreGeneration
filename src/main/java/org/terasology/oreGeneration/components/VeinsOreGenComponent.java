@@ -16,9 +16,9 @@
 package org.terasology.oreGeneration.components;
 
 import org.terasology.customOreGen.PDist;
-import org.terasology.customOreGen.PocketStructureDefinition;
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
+import org.terasology.customOreGen.VeinsStructureDefinition;
 import org.terasology.entitySystem.Component;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.registry.CoreRegistry;
@@ -29,27 +29,56 @@ import org.terasology.world.generation.Region;
 import org.terasology.world.generation.facets.DensityFacet;
 import org.terasology.world.generation.facets.SurfaceHeightFacet;
 
-public class PocketOreGenComponent implements Component, CustomOreGenCreator {
+public class VeinsOreGenComponent implements Component, CustomOreGenCreator {
     public String block;
     // frequency for every 10 cubed blocks
     public float frequency = 1f;
     public float frequencyRange;
-    public float radius = 2f;
-    public float radiusRange = 1f;
-    public float thickness = 6f;
-    public float thicknessRange = 3f;
-    public float angle = 1f;
-    public float angleRange = 1f;
-    public float multiplier = 1f;
-    public float multiplierRange;
-    public float density = 0.7f;
-    public float densityRange = 0.2f;
-    public float noiseLevel = 0.2f;
-    public float noiseLevelRange = 0.2f;
-    public float noiseCutoff;
-    public float noiseCutoffRange;
+    public float motherLodeRadius = 2f;
+    public float motherLodeRadiusRange = 1f;
+    public float motherlodeRangeLimit = 32;
+    public float motherlodeRangeLimitRange = 32;
+    public float branchFrequency = 4f;
+    public float branchFrequencyRange = 1f;
+    public float branchInclination = 0f;
+    public float branchInclinationRange = 0.1f;
+    public float branchLength = 40f;
+    public float branchLengthRange = 10f;
+    public float branchHeightLimit = 100f;
+    public float branchHeightLimitRange = 0f;
+    public float density = 1f;
+    public float densityRange = 0f;
+    private float segmentForkFrequency = 0.3f;
+    private float segmentForkFrequencyRange = 0.1f;
+    private float segmentForkLengthMultiplier = 0.25f;
+    private float segmentForkLengthMultiplierRange = 0f;
+    private float segmentLength = 5f;
+    private float segmentLengthRange = 0f;
+    private float segmentAngle = 0.5f;
+    private float segmentAngleRange = 0.5f;
+    private float segmentRadius = 4f;
+    private float segmentRadiusRange = 1f;
+    private float blockRadiusMultiplier = 1f;
+    private float blockRadiusMultiplierRange = 0f;
     // This is the density at which ore generation will stop generating. Useful to prevent generating ores above the surface
     public int densityCutoff = 2;
+/*
+
+
+    private float segmentForkFrequency = 0.2f;
+    private float segmentForkFrequencyRange;
+    private float segmentForkLengthMultiplier = 0.75f;
+    private float segmentForkLengthMultiplierRange = 0.25f;
+    private float segmentLength = 15f;
+    private float segmentLengthRange = 6f;
+    private float segmentAngle = 0.5f;
+    private float segmentAngleRange = 0.5f;
+    private float segmentRadius = 0.5f;
+    private float segmentRadiusRange = 0.3f;
+    private float blockRadiusMultiplier = 1f;
+    private float blockRadiusMultiplierRange = 0.1f;
+ */
+
 
     @Override
     public StructureDefinition createStructureDefinition(GeneratingRegion region) {
@@ -68,13 +97,6 @@ public class PocketOreGenComponent implements Component, CustomOreGenCreator {
     protected boolean isInRange(GeneratingRegion region) {
         // find the average surface height
         SurfaceHeightFacet surfaceHeightFacet = region.getRegionFacet(SurfaceHeightFacet.class);
-        float averageSurfaceHeight = getAverageSurfaceHeight(surfaceHeightFacet);
-
-        // see if this region is even in range of this ore gen
-        return region.getRegion().minY() < averageSurfaceHeight;
-    }
-
-    static float getAverageSurfaceHeight(SurfaceHeightFacet surfaceHeightFacet) {
         float[] values = surfaceHeightFacet.getInternal();
         float total = 0;
         // averaging every single value takes too much time, only use some of the values in our average
@@ -82,20 +104,28 @@ public class PocketOreGenComponent implements Component, CustomOreGenCreator {
         for (int i = 0; i < values.length; i = i + sampleRate) {
             total += values[i];
         }
-        return total / (values.length / sampleRate);
+        float averageSurfaceHeight = total / (values.length / sampleRate);
+
+        // see if this region is even in range of this ore gen
+        return region.getRegion().minY() < averageSurfaceHeight;
     }
 
     private StructureDefinition getStructureDefinition(GeneratingRegion region, float scaleFactor) {
-        return new PocketStructureDefinition(
+        return new VeinsStructureDefinition(
                 new PDist(frequency * scaleFactor, frequencyRange * scaleFactor),
-                new PDist(radius, radiusRange),
-                new PDist(thickness, thicknessRange),
-                new PDist(region.getRegion().sizeY() / 2, region.getRegion().sizeY() / 2),
-                new PDist(angle, angleRange),
-                new PDist(multiplier, multiplierRange),
+                new PDist(motherLodeRadius, motherLodeRadiusRange),
+                new PDist(motherlodeRangeLimit, motherlodeRangeLimitRange),
+                new PDist(branchFrequency, branchFrequencyRange),
+                new PDist(branchInclination, branchInclinationRange),
+                new PDist(branchLength, branchLengthRange),
+                new PDist(branchHeightLimit, branchHeightLimitRange),
+                new PDist(segmentForkFrequency, segmentForkFrequencyRange),
+                new PDist(segmentForkLengthMultiplier, segmentForkLengthMultiplierRange),
+                new PDist(segmentLength, segmentLengthRange),
+                new PDist(segmentAngle, segmentAngleRange),
+                new PDist(segmentRadius, segmentRadiusRange),
                 new PDist(density, densityRange),
-                new PDist(noiseLevel, noiseLevelRange),
-                new PDist(noiseCutoff, noiseCutoffRange));
+                new PDist(blockRadiusMultiplier, blockRadiusMultiplierRange));
     }
 
     @Override
