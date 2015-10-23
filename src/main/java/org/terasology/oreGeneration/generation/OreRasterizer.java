@@ -18,7 +18,7 @@ package org.terasology.oreGeneration.generation;
 import com.google.common.collect.Maps;
 import org.terasology.customOreGen.StructureNodeType;
 import org.terasology.math.geom.Vector3i;
-import org.terasology.oreGeneration.components.CustomOreGenCreator;
+import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.oreGeneration.systems.OreGenRegistrySystem;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.world.block.Block;
@@ -34,15 +34,6 @@ import java.util.Map;
 
 @RegisterPlugin
 public class OreRasterizer implements WorldRasterizer, WorldRasterizerPlugin {
-    String blockUri;
-
-    public OreRasterizer() {
-    }
-
-    public OreRasterizer(String blockUri) {
-        this.blockUri = blockUri;
-    }
-
     @Override
     public void initialize() {
     }
@@ -54,7 +45,7 @@ public class OreRasterizer implements WorldRasterizer, WorldRasterizerPlugin {
         BlockManager blockManager = CoreRegistry.get(BlockManager.class);
         OreGenRegistrySystem oreGenRegistrySystem = CoreRegistry.get(OreGenRegistrySystem.class);
 
-        for (CustomOreGenCreator oreGenCreator : oreGenRegistrySystem.iterateDefinitions()) {
+        for (CustomOreGen oreGenCreator : oreGenRegistrySystem.iterateDefinitions()) {
             Map<StructureNodeType, Block> nodeTypeToBlocks = Maps.newHashMap();
             for (Vector3i position : ChunkConstants.CHUNK_REGION) {
                 StructureNodeType nodeType = oreFacet.get(oreGenCreator, position);

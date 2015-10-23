@@ -19,7 +19,7 @@ import org.terasology.customOreGen.Structure;
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
 import org.terasology.math.geom.Vector3i;
-import org.terasology.oreGeneration.components.CustomOreGenCreator;
+import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.oreGeneration.systems.OreGenRegistrySystem;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.world.generation.FacetProviderPlugin;
@@ -46,7 +46,7 @@ public class OreFacetProvider implements FacetProviderPlugin {
         final OreFacet facet = new OreFacet(region.getRegion(), region.getBorderForFacet(OreFacet.class));
 
         final GeneratingRegion finalRegion = region;
-        for (final CustomOreGenCreator creator : oreGenRegistrySystem.iterateDefinitions()) {
+        for (final CustomOreGen creator : oreGenRegistrySystem.iterateDefinitions()) {
             StructureDefinition structureDefinition = creator.createStructureDefinition(region);
             if (structureDefinition != null) {
                 Collection<Structure> structures = structureDefinition.generateStructures(seed + creator.getSalt(), region.getRegion());

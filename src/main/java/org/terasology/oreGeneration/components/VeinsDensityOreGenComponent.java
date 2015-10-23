@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 MovingBlocks
+ * Copyright 2015 MovingBlocks
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -17,8 +17,7 @@ package org.terasology.oreGeneration.components;
 
 import org.terasology.entitySystem.Component;
 
-/**
- * Add this to a prefab to allow import of all CustomOreGen component triggers into the registry
- */
-public class OreGenDefinitionComponent implements Component {
+public class VeinsDensityOreGenComponent extends BaseVeinsOreGenComponent implements Component {
+    public int minDensity = 2;
+    public int maxDensity = Integer.MAX_VALUE;
 }

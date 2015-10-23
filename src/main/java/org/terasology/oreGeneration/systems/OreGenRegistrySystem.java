@@ -15,6 +15,8 @@
  */
 package org.terasology.oreGeneration.systems;
 
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
 import org.terasology.entitySystem.Component;
 import org.terasology.entitySystem.prefab.Prefab;
@@ -22,61 +24,70 @@ import org.terasology.entitySystem.prefab.PrefabManager;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterSystem;
 import org.terasology.logic.console.commandSystem.annotations.Command;
-import org.terasology.oreGeneration.components.CustomOreGenCreator;
+import org.terasology.oreGeneration.CustomOreGen;
+import org.terasology.oreGeneration.OreGenRegistry;
 import org.terasology.oreGeneration.components.OreGenDefinitionComponent;
+import org.terasology.oreGeneration.components.PocketDensityOreGenComponent;
+import org.terasology.oreGeneration.components.VeinsDensityOreGenComponent;
+import org.terasology.oreGeneration.generation.PocketDensityOreGen;
+import org.terasology.oreGeneration.generation.VeinsDensityOreGen;
 import org.terasology.registry.In;
+import org.terasology.registry.InjectionHelper;
 import org.terasology.registry.Share;
 
+import java.util.Map;
 import java.util.Set;
+import java.util.function.Function;
 
 @RegisterSystem
-@Share(OreGenRegistrySystem.class)
-public class OreGenRegistrySystem extends BaseComponentSystem {
+@Share(OreGenRegistry.class)
+public class OreGenRegistrySystem extends BaseComponentSystem implements OreGenRegistry {
     @In
     PrefabManager prefabManager;
 
-    Set<CustomOreGenCreator> registry;
+    Multimap<Class, Function<Component, CustomOreGen>> registrationComponentTriggers = HashMultimap.create();
+    Set<CustomOreGen> registry;
 
     public void initialise() {
         super.initialise();
+        registrationComponentTrigger(VeinsDensityOreGenComponent.class, x -> new VeinsDensityOreGen(x));
+        registrationComponentTrigger(PocketDensityOreGenComponent.class, x -> new PocketDensityOreGen(x));
+    }
 
+    @Override
+    public void postBegin() {
+        super.postBegin();
         createRegistry();
     }
 
     private void createRegistry() {
         registry = Sets.newHashSet();
         for (Prefab prefab : prefabManager.listPrefabs(OreGenDefinitionComponent.class)) {
-            for (Component component : prefab.iterateComponents()) {
-                if (component instanceof CustomOreGenCreator) {
-                    registry.add((CustomOreGenCreator) component);
+            for (Map.Entry<Class, Function<Component, CustomOreGen>> entry : registrationComponentTriggers.entries()) {
+                Component component = prefab.getComponent(entry.getKey());
+                if (component != null) {
+                    CustomOreGen customOreGen = entry.getValue().apply(component);
+                    InjectionHelper.inject(customOreGen);
+                    registry.add(customOreGen);
                 }
             }
         }
     }
 
-    public Iterable<CustomOreGenCreator> iterateDefinitions() {
+    @Override
+    public <T extends Component> void registrationComponentTrigger(Class<T> c, Function<T, CustomOreGen> factory) {
+        registrationComponentTriggers.put(c, (Function<Component, CustomOreGen>) factory);
+    }
+
+    @Override
+    public Iterable<CustomOreGen> iterateDefinitions() {
         return registry;
     }
 
-
+    @Override
     @Command(shortDescription = "Reloads the ore gen registry")
     public String reloadOreGenRegistry() {
-        String message = "";
-        /*for (Prefab prefab : prefabManager.listPrefabs(OreGenDefinitionComponent.class)) {
-            message += reloadPrefab(prefab.getName());
-        }*/
         createRegistry();
-        return message;
-    }
-
-    public String reloadPrefab(String prefab) {
-        /*AssetUri uri = new AssetUri(AssetType.PREFAB, prefab);
-        PrefabData prefabData = CoreRegistry.get(AssetManager.class).loadAssetData(uri, PrefabData.class);
-        if (prefabData != null) {
-            CoreRegistry.get(AssetManager.class).generateAsset(uri, prefabData);
-            return "Success";
-        } else {*/
-        return "Unable to resolve prefab '" + prefab + "'";
-        //}
+        return "Ore registry reloaded";
     }
 }

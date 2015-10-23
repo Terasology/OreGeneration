@@ -17,8 +17,7 @@ package org.terasology.oreGeneration.components;
 
 import org.terasology.entitySystem.Component;
 
-/**
- * Add this to a prefab to allow import of all CustomOreGen component triggers into the registry
- */
-public class OreGenDefinitionComponent implements Component {
+public class PocketDensityOreGenComponent extends BasePocketOreGenComponent implements Component {
+    public int minDensity = 2;
+    public int maxDensity = Integer.MAX_VALUE;
 }
