@@ -19,7 +19,7 @@ import com.google.common.collect.Maps;
 import org.terasology.customOreGen.StructureNodeType;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.oreGeneration.CustomOreGen;
-import org.terasology.oreGeneration.systems.OreGenRegistrySystem;
+import org.terasology.oreGeneration.OreGenRegistry;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.world.block.Block;
 import org.terasology.world.block.BlockManager;
@@ -43,7 +43,7 @@ public class OreRasterizer implements WorldRasterizer, WorldRasterizerPlugin {
         OreFacet oreFacet = chunkRegion.getFacet(OreFacet.class);
 
         BlockManager blockManager = CoreRegistry.get(BlockManager.class);
-        OreGenRegistrySystem oreGenRegistrySystem = CoreRegistry.get(OreGenRegistrySystem.class);
+        OreGenRegistry oreGenRegistrySystem = CoreRegistry.get(OreGenRegistry.class);
 
         for (CustomOreGen oreGenCreator : oreGenRegistrySystem.iterateDefinitions()) {
             Map<StructureNodeType, Block> nodeTypeToBlocks = Maps.newHashMap();
