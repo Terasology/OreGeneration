@@ -19,14 +19,11 @@ import org.terasology.customOreGen.PDist;
 import org.terasology.customOreGen.PocketStructureDefinition;
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.oreGeneration.components.BasePocketOreGenComponent;
 import org.terasology.registry.In;
 import org.terasology.world.block.Block;
 import org.terasology.world.block.BlockManager;
 import org.terasology.world.generation.GeneratingRegion;
-import org.terasology.world.generation.Region;
-import org.terasology.world.generation.facets.DensityFacet;
 
 public abstract class PocketOreGen extends BaseOreGen {
     @In
@@ -49,13 +46,6 @@ public abstract class PocketOreGen extends BaseOreGen {
                 new PDist(component.density, component.densityRange),
                 new PDist(component.noiseLevel, component.noiseLevelRange),
                 new PDist(component.noiseCutoff, component.noiseCutoffRange));
-    }
-
-    @Override
-    public boolean canReplaceBlock(Vector3i worldPosition, Region region) {
-        DensityFacet densityFacet = region.getFacet(DensityFacet.class);
-        float densityFacetValue = densityFacet.getWorld(worldPosition);
-        return densityFacetValue > component.densityCutoff;
     }
 
     @Override
