@@ -21,7 +21,6 @@ import org.terasology.entitySystem.prefab.Prefab;
 import org.terasology.entitySystem.prefab.PrefabManager;
 import org.terasology.entitySystem.systems.BaseComponentSystem;
 import org.terasology.entitySystem.systems.RegisterSystem;
-import org.terasology.logic.console.commandSystem.annotations.Command;
 import org.terasology.oreGeneration.components.CustomOreGenCreator;
 import org.terasology.oreGeneration.components.OreGenDefinitionComponent;
 import org.terasology.registry.In;
@@ -35,48 +34,15 @@ public class OreGenRegistrySystem extends BaseComponentSystem {
     @In
     PrefabManager prefabManager;
 
-    Set<CustomOreGenCreator> registry;
-
-    public void initialise() {
-        super.initialise();
-
-        createRegistry();
-    }
-
-    private void createRegistry() {
-        registry = Sets.newHashSet();
+    public Iterable<CustomOreGenCreator> iterateDefinitions() {
+        Set<CustomOreGenCreator> result = Sets.newHashSet();
         for (Prefab prefab : prefabManager.listPrefabs(OreGenDefinitionComponent.class)) {
             for (Component component : prefab.iterateComponents()) {
                 if (component instanceof CustomOreGenCreator) {
-                    registry.add((CustomOreGenCreator) component);
+                    result.add((CustomOreGenCreator) component);
                 }
             }
         }
-    }
-
-    public Iterable<CustomOreGenCreator> iterateDefinitions() {
-        return registry;
-    }
-
-
-    @Command(shortDescription = "Reloads the ore gen registry")
-    public String reloadOreGenRegistry() {
-        String message = "";
-        /*for (Prefab prefab : prefabManager.listPrefabs(OreGenDefinitionComponent.class)) {
-            message += reloadPrefab(prefab.getName());
-        }*/
-        createRegistry();
-        return message;
-    }
-
-    public String reloadPrefab(String prefab) {
-        /*AssetUri uri = new AssetUri(AssetType.PREFAB, prefab);
-        PrefabData prefabData = CoreRegistry.get(AssetManager.class).loadAssetData(uri, PrefabData.class);
-        if (prefabData != null) {
-            CoreRegistry.get(AssetManager.class).generateAsset(uri, prefabData);
-            return "Success";
-        } else {*/
-        return "Unable to resolve prefab '" + prefab + "'";
-        //}
+        return result;
     }
 }
