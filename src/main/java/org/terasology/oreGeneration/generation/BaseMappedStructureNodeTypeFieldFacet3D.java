@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.terasology.world.generation.facets.base;
+package org.terasology.oreGeneration.generation;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
@@ -21,8 +21,8 @@ import org.terasology.customOreGen.StructureNodeType;
 import org.terasology.math.Region3i;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.oreGeneration.components.CustomOreGenCreator;
-import org.terasology.oreGeneration.generation.MappedStructureNodeTypeFieldFacet3D;
 import org.terasology.world.generation.Border3D;
+import org.terasology.world.generation.facets.base.BaseFacet3D;
 
 import java.util.Map;
 
