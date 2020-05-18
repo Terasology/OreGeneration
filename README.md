@@ -14,7 +14,7 @@ Pocket ore generation is small clumps of blocks that occur underground
     "OreGenDefinition" :  {},
     "PocketOreGen" :
     {
-        "block" : "CoreBlocks:IronOre", //  What block will be placed
+        "block" : "CoreAssets:IronOre", //  What block will be placed
         "frequency" : 1 // How often this pocket will happen in 10 vertical blocks in the region
     }
 }
@@ -60,7 +60,7 @@ This pocket ore gen is contained within a certain range of depth underground.
     "OreGenDefinition" :  {},
     "DepthPocketOreGen" :
     {
-        "block" : "CoreBlocks:IronOre", //  What block will be placed
+        "block" : "CoreAssets:IronOre", //  What block will be placed
         "frequency" : 1, // How often this pocket will happen in 10 vertical blocks in the region
         "minDepth" : 4, // The minimum depth that this pocket will occur
         "maxDepth" : 80 // The maximum depth that this pocket will occur
@@ -110,7 +110,7 @@ The Veins ore generation creates a round central "motherlode" with branches radi
     "OreGenDefinition" :  {},
     "VeinsOreGen" :
     {
-        "block" : "CoreBlocks:IronOre", //  What block will be placed
+        "block" : "CoreAssets:IronOre", //  What block will be placed
         "frequency" : 1 // How often this ore gen will happen in 10 vertical blocks in the region
     }
 }
@@ -167,7 +167,7 @@ The Veins ore generation creates a round central "motherlode" with branches radi
     "OreGenDefinition" :  {},
     "DepthVeinsOreGen" :
     {
-        "block" : "CoreBlocks:IronOre", //  What block will be placed
+        "block" : "CoreAssets:IronOre", //  What block will be placed
         "frequency" : 1, // How often this ore gen will happen in 10 vertical blocks in the region
         "minDepth" : 4, // The minimum depth that this pocket will occur
         "maxDepth" : 80 // The maximum depth that this pocket will occur
