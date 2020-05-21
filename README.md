@@ -24,7 +24,7 @@ Default values can be found in the component definition.
 }
 ```
 
-## Depth-based Generation
+### Depth-based Generation
 
 This pocket ore gen is contained within a certain range of depth underground.
 The _depth pocket density ore gen component_ [`DepthPocketOreGenComponent`](/src/main/java/org/terasology/oreGeneration/components/DepthPocketOreGenComponent.java) provides additional properties.
@@ -50,7 +50,7 @@ Branches may twist and turn, and may fork to create a more tree-like structure.
 All veins-based or generators share the properties defined in the base _veins ore-generation component_ [`BaseVeinsOreGenComponent`](/src/main/java/org/terasology/oreGeneration/components/BaseVeinsOreGenComponent.java).
 Default values can be found in the component definition.
 
-## Density-based Generation
+### Density-based Generation
 
 Restricts the generation of veins based on the _density_.
 The _density-based veins ore-generation component_ [`VeinsDensityOreGenComponent`](/src/main/java/org/terasology/oreGeneration/components/VeinsDensityOreGenComponent.java) defines additional properties.
@@ -67,7 +67,7 @@ Default values can be found in the component definition.
 }
 ```
 
-## Depth-based Generation
+### Depth-based Generation
 
 Restrict the generation of veins to a specific range of depth underground.
 The _depth-based veins ore-generation component_ [`DepthVeinsOreGenComponent`](/src/main/java/org/terasology/oreGeneration/components/DepthVeinsOreGenComponent.java) defines additional properties.
