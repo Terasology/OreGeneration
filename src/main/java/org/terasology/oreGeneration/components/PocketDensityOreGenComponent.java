@@ -15,7 +15,9 @@
  */
 package org.terasology.oreGeneration.components;
 
-public class DepthPocketOreGenComponent extends BasePocketOreGenComponent {
-    public int minDepth;
-    public int maxDepth;
+import org.terasology.entitySystem.Component;
+
+public class PocketDensityOreGenComponent extends BasePocketOreGenComponent implements Component {
+    public int minDensity = 2;
+    public int maxDensity = Integer.MAX_VALUE;
 }

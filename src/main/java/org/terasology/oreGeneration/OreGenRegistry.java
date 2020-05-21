@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 MovingBlocks
+ * Copyright 2015 MovingBlocks
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -13,9 +13,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.terasology.oreGeneration.components;
+package org.terasology.oreGeneration;
 
-public class DepthPocketOreGenComponent extends BasePocketOreGenComponent {
-    public int minDepth;
-    public int maxDepth;
+import org.terasology.entitySystem.Component;
+
+import java.util.function.Function;
+
+public interface OreGenRegistry {
+    <T extends Component> void registrationComponentTrigger(Class<T> c, Function<T, CustomOreGen> factory);
+
+    Iterable<CustomOreGen> iterateDefinitions();
+
+    String reloadOreGenRegistry();
 }

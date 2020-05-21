@@ -1,5 +1,5 @@
 /*
- * Copyright 2014 MovingBlocks
+ * Copyright 2020 MovingBlocks
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -20,19 +20,16 @@ import com.google.common.collect.Maps;
 import org.terasology.customOreGen.StructureNodeType;
 import org.terasology.math.Region3i;
 import org.terasology.math.geom.Vector3i;
-import org.terasology.oreGeneration.components.CustomOreGenCreator;
+import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.world.generation.Border3D;
 import org.terasology.world.generation.facets.base.BaseFacet3D;
 
 import java.util.Map;
 
-/**
- * @author Immortius
- */
 public abstract class BaseMappedStructureNodeTypeFieldFacet3D extends BaseFacet3D implements MappedStructureNodeTypeFieldFacet3D {
 
     private final Vector3i size;
-    private Map<CustomOreGenCreator, StructureNodeType[]> data = Maps.newHashMap();
+    private Map<CustomOreGen, StructureNodeType[]> data = Maps.newHashMap();
 
     public BaseMappedStructureNodeTypeFieldFacet3D(Region3i targetRegion, Border3D border) {
         super(targetRegion, border);
@@ -44,36 +41,36 @@ public abstract class BaseMappedStructureNodeTypeFieldFacet3D extends BaseFacet3
     }
 
     @Override
-    public StructureNodeType get(CustomOreGenCreator oreGenCreator, int x, int y, int z) {
+    public StructureNodeType get(CustomOreGen oreGenCreator, int x, int y, int z) {
         return getData(oreGenCreator)[getRelativeIndex(x, y, z)];
     }
 
     @Override
-    public StructureNodeType get(CustomOreGenCreator oreGenCreator, Vector3i pos) {
+    public StructureNodeType get(CustomOreGen oreGenCreator, Vector3i pos) {
         return get(oreGenCreator, pos.x, pos.y, pos.z);
     }
 
     @Override
-    public StructureNodeType getWorld(CustomOreGenCreator oreGenCreator, int x, int y, int z) {
+    public StructureNodeType getWorld(CustomOreGen oreGenCreator, int x, int y, int z) {
         return getData(oreGenCreator)[getWorldIndex(x, y, z)];
     }
 
     @Override
-    public StructureNodeType getWorld(CustomOreGenCreator oreGenCreator, Vector3i pos) {
+    public StructureNodeType getWorld(CustomOreGen oreGenCreator, Vector3i pos) {
         return getWorld(oreGenCreator, pos.x, pos.y, pos.z);
     }
 
     @Override
-    public StructureNodeType[] getInternal(CustomOreGenCreator oreGenCreator) {
+    public StructureNodeType[] getInternal(CustomOreGen oreGenCreator) {
         return data.get(oreGenCreator);
     }
 
     @Override
-    public void set(CustomOreGenCreator oreGenCreator, int x, int y, int z, StructureNodeType value) {
+    public void set(CustomOreGen oreGenCreator, int x, int y, int z, StructureNodeType value) {
         getData(oreGenCreator)[getRelativeIndex(x, y, z)] = value;
     }
 
-    private StructureNodeType[] getData(CustomOreGenCreator oreGenCreator) {
+    private StructureNodeType[] getData(CustomOreGen oreGenCreator) {
         if (!data.containsKey(oreGenCreator)) {
             set(oreGenCreator, createData());
         }
@@ -81,22 +78,22 @@ public abstract class BaseMappedStructureNodeTypeFieldFacet3D extends BaseFacet3
     }
 
     @Override
-    public void set(CustomOreGenCreator oreGenCreator, Vector3i pos, StructureNodeType value) {
+    public void set(CustomOreGen oreGenCreator, Vector3i pos, StructureNodeType value) {
         set(oreGenCreator, pos.x, pos.y, pos.z, value);
     }
 
     @Override
-    public void setWorld(CustomOreGenCreator oreGenCreator, int x, int y, int z, StructureNodeType value) {
+    public void setWorld(CustomOreGen oreGenCreator, int x, int y, int z, StructureNodeType value) {
         getData(oreGenCreator)[getWorldIndex(x, y, z)] = value;
     }
 
     @Override
-    public void setWorld(CustomOreGenCreator oreGenCreator, Vector3i pos, StructureNodeType value) {
+    public void setWorld(CustomOreGen oreGenCreator, Vector3i pos, StructureNodeType value) {
         setWorld(oreGenCreator, pos.x, pos.y, pos.z, value);
     }
 
     @Override
-    public void set(CustomOreGenCreator oreGenCreator, StructureNodeType[] newData) {
+    public void set(CustomOreGen oreGenCreator, StructureNodeType[] newData) {
         if (!data.containsKey(oreGenCreator)) {
             data.put(oreGenCreator, newData);
         } else {
