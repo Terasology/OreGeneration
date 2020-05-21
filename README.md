@@ -1,62 +1,41 @@
-# OreGeneration
+# Ore Generation
 
 A plugin system for adding randomized ore generation to the world
 
-
 ## Pocket Ore Generation
-Pocket ore generation is small clumps of blocks that occur underground
 
-### Minimal usage on a prefab
+All **pocket ore generation** variants share the base properties defined in the base _pocket ore-generation component_ [`BasePocketOreGenComponent`](/src/main/java/org/terasology/oreGeneration/components/BasePocketOreGenComponent.java).
+Default values can be found in the component definition.
+
+### Density-based generation
+
+Pocket ore generation is small clumps of blocks that occur underground.
+The _pocket density ore gen component_ [`PocketDensityOreGenComponent`](/src/main/java/org/terasology/oreGeneration/components/PocketDensityOreGenComponent.java) provides additional properties.
+Default values can be found in the component definition.
 
 ```json5
+// Minimal definition, e.g, in 'CoalOreGen.prefab'
 {
     "OreGenDefinition":  {},
-    "PocketOreGen": {
-        "block": "CoreAssets:IronOre",  // What block will be placed
+    "PocketDensityOreGen": {
+        "block": "CoreAssets:CoalOre",  // What block will be placed
         "frequency": 1                  // How often this pocket will happen in 10 vertical blocks in the region
     }
 }
 ```
 
-### Defaults
+## Depth-based Generation
 
-```json5
-{
-    "OreGenDefinition":  {},
-    "PocketOreGen": {
-        "frequency": 1,
-        "frequencyRange": 0,
-        "radius": 2,
-        "radiusRange": 1,
-        "thickness": 6,
-        "thicknessRange": 3,
-        "angle": 1,
-        "angleRange": 1,
-        "multiplier": 1,
-        "multiplierRange": 0,
-        "density": 0.7,
-        "densityRange": 0.2,
-        "densityCutoff": 2,
-        "noiseLevel": 0.2,
-        "noiseLevelRange": 0.2,
-        "noiseCutoff": 0,
-        "noiseCutoffRange": 0,
-        "densityCutoff": 2
-    }
-}
-```
-
-
-## Depth Pocket Ore Generation
 This pocket ore gen is contained within a certain range of depth underground.
-
-### Minimal usage on a prefab
+The _depth pocket density ore gen component_ [`DepthPocketOreGenComponent`](/src/main/java/org/terasology/oreGeneration/components/DepthPocketOreGenComponent.java) provides additional properties.
+Default values can be found in the component definition.
 
 ```json5
+// Minimal definition, e.g, in 'CoalOreGen.prefab'
 {
     "OreGenDefinition":  {},
     "DepthPocketOreGen": {
-        "block": "CoreAssets:IronOre", //  What block will be placed
+        "block": "CoreAssets:CoalOre", //  What block will be placed
         "frequency": 1,                // How often this pocket will happen in 10 vertical blocks in the region
         "minDepth": 4,                 // The minimum depth that this pocket will occur
         "maxDepth": 80                 // The maximum depth that this pocket will occur
@@ -64,99 +43,38 @@ This pocket ore gen is contained within a certain range of depth underground.
 }
 ```
 
-### Defaults
-
-```json5
-{
-    "OreGenDefinition":  {},
-    "DepthPocketOreGen": {    
-        "block": Null,
-        "minDepth": 0,
-        "maxDepth": 0,
-        "frequency": 1,
-        "frequencyRange": 0,
-        "radius": 2,
-        "radiusRange": 1,
-        "thickness": 6,
-        "thicknessRange": 3,
-        "angle": 1,
-        "angleRange": 1,
-        "multiplier": 1,
-        "multiplierRange": 0,
-        "density": 0.7,
-        "densityRange": 0.2,
-        "densityCutoff": 2,
-        "noiseLevel": 0.2,
-        "noiseLevelRange": 0.2,
-        "noiseCutoff": 0,
-        "noiseCutoffRange": 0,
-        "densityCutoff": 2
-    }
-}
-```
-
 ## Veins Ore Generation
-The Veins ore generation creates a round central "motherlode" with branches radiating in all directions. Branches may twist and turn, and also may fork to create a more tree-like structure.
 
-### Minimal usage on a prefab
+The **veins ore generation** creates a round central "mother lode" with branches radiating in all directions.
+Branches may twist and turn, and may fork to create a more tree-like structure.
+All veins-based or generators share the properties defined in the base _veins ore-generation component_ [`BaseVeinsOreGenComponent`](/src/main/java/org/terasology/oreGeneration/components/BaseVeinsOreGenComponent.java).
+Default values can be found in the component definition.
+
+## Density-based Generation
+
+Restricts the generation of veins based on the _density_.
+The _density-based veins ore-generation component_ [`VeinsDensityOreGenComponent`](/src/main/java/org/terasology/oreGeneration/components/VeinsDensityOreGenComponent.java) defines additional properties.
+Default values can be found in the component definition.
 
 ```json5
+// Minimal definition, e.g, in 'IronOreGen.prefab'
 {
     "OreGenDefinition":  {},
-    "VeinsOreGen": {
+    "VeinsDensityOreGen": {
         "block": "CoreAssets:IronOre",  //  What block will be placed
         "frequency": 1                  // How often this ore gen will happen in 10 vertical blocks in the region
     }
 }
 ```
 
-### Defaults
+## Depth-based Generation
+
+Restrict the generation of veins to a specific range of depth underground.
+The _depth-based veins ore-generation component_ [`DepthVeinsOreGenComponent`](/src/main/java/org/terasology/oreGeneration/components/DepthVeinsOreGenComponent.java) defines additional properties.
+Default values can be found in the component definition.
 
 ```json5
-{
-    "OreGenDefinition":  {},
-    "VeinsOreGen": {
-        "block": Null,   
-        "frequency": 1,
-        "frequencyRange": 0,
-        "motherLodeRadius": 2,
-        "motherLodeRadiusRange": 1,
-        "motherlodeRangeLimit": 32,
-        "motherlodeRangeLimitRange": 32,
-        "branchFrequency": 4,
-        "branchFrequencyRange": 1,
-        "branchInclination": 0,
-        "branchInclinationRange": 0.1,
-        "branchLength": 40,
-        "branchLengthRange": 10,
-        "branchHeightLimit": 100,
-        "branchHeightLimitRange": 0,
-        "density": 1,
-        "densityRange": 0,
-        "segmentForkFrequency": 0.3,
-        "segmentForkFrequencyRange": 0.1,
-        "segmentForkLengthMultiplier": 0.25,
-        "segmentForkLengthMultiplierRange": 0,
-        "segmentLength": 5,
-        "segmentLengthRange": 0,
-        "segmentAngle": 0.5,
-        "segmentAngleRange": 0.5,
-        "segmentRadius": 4,
-        "segmentRadiusRange": 1,
-        "blockRadiusMultiplier": 1,
-        "blockRadiusMultiplierRange": 0,
-        "densityCutoff": 2
-    }
-}
-```
-
-
-## Depth Veins Ore Generation
-The Veins ore generation creates a round central "motherlode" with branches radiating in all directions. Branches may twist and turn, and also may fork to create a more tree-like structure.
-
-### Minimal usage on a prefab
-
-```json5
+// Minimal definition, e.g, in 'IronOreGen.prefab'
 {
     "OreGenDefinition":  {},
     "DepthVeinsOreGen": {
@@ -164,48 +82,6 @@ The Veins ore generation creates a round central "motherlode" with branches radi
         "frequency": 1,                 // How often this ore gen will happen in 10 vertical blocks in the region
         "minDepth": 4,                  // The minimum depth that this pocket will occur
         "maxDepth": 80                  // The maximum depth that this pocket will occur
-    }
-}
-```
-
-### Defaults
-
-```json5
-{
-    "OreGenDefinition":  {},
-    "DepthVeinsOreGen": {
-        "block": Null,
-        "minDepth": 0,
-        "maxDepth": 0,  
-        "frequency": 1,
-        "frequencyRange": 0,
-        "motherLodeRadius": 2,
-        "motherLodeRadiusRange": 1,
-        "motherlodeRangeLimit": 32,
-        "motherlodeRangeLimitRange": 32,
-        "branchFrequency": 4,
-        "branchFrequencyRange": 1,
-        "branchInclination": 0,
-        "branchInclinationRange": 0.1,
-        "branchLength": 40,
-        "branchLengthRange": 10,
-        "branchHeightLimit": 100,
-        "branchHeightLimitRange": 0,
-        "density": 1,
-        "densityRange": 0,
-        "segmentForkFrequency": 0.3,
-        "segmentForkFrequencyRange": 0.1,
-        "segmentForkLengthMultiplier": 0.25,
-        "segmentForkLengthMultiplierRange": 0,
-        "segmentLength": 5,
-        "segmentLengthRange": 0,
-        "segmentAngle": 0.5,
-        "segmentAngleRange": 0.5,
-        "segmentRadius": 4,
-        "segmentRadiusRange": 1,
-        "blockRadiusMultiplier": 1,
-        "blockRadiusMultiplierRange": 0,
-        "densityCutoff": 2
     }
 }
 ```
