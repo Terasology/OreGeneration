@@ -1,31 +1,18 @@
-/*
- * Copyright 2014 MovingBlocks
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2020 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
 package org.terasology.oreGeneration.generation;
 
 import org.terasology.customOreGen.Structure;
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
+import org.terasology.engine.registry.CoreRegistry;
+import org.terasology.engine.world.generation.FacetProviderPlugin;
+import org.terasology.engine.world.generation.GeneratingRegion;
+import org.terasology.engine.world.generation.Produces;
+import org.terasology.engine.world.generator.plugin.RegisterPlugin;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.oreGeneration.OreGenRegistry;
-import org.terasology.registry.CoreRegistry;
-import org.terasology.world.generation.FacetProviderPlugin;
-import org.terasology.world.generation.GeneratingRegion;
-import org.terasology.world.generation.Produces;
-import org.terasology.world.generator.plugin.RegisterPlugin;
 
 import java.util.Collection;
 
@@ -49,12 +36,14 @@ public class OreFacetProvider implements FacetProviderPlugin {
         for (final CustomOreGen creator : oreGenRegistrySystem.iterateDefinitions()) {
             StructureDefinition structureDefinition = creator.createStructureDefinition(region);
             if (structureDefinition != null) {
-                Collection<Structure> structures = structureDefinition.generateStructures(seed + creator.getSalt(), region.getRegion());
+                Collection<Structure> structures = structureDefinition.generateStructures(seed + creator.getSalt(),
+                        region.getRegion());
 
                 for (Structure structure : structures) {
                     structure.generateStructure(new Structure.StructureCallback() {
                         @Override
-                        public void replaceBlock(Vector3i position, StructureNodeType structureNodeType, Vector3i distanceToCenter) {
+                        public void replaceBlock(Vector3i position, StructureNodeType structureNodeType,
+                                                 Vector3i distanceToCenter) {
                             facet.set(creator, position, structureNodeType);
                         }
 
