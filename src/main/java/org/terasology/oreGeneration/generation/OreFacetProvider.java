@@ -15,9 +15,11 @@
  */
 package org.terasology.oreGeneration.generation;
 
+import org.joml.Vector3ic;
 import org.terasology.customOreGen.Structure;
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
+import org.terasology.math.JomlUtil;
 import org.terasology.math.geom.Vector3i;
 import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.oreGeneration.OreGenRegistry;
@@ -49,13 +51,14 @@ public class OreFacetProvider implements FacetProviderPlugin {
         for (final CustomOreGen creator : oreGenRegistrySystem.iterateDefinitions()) {
             StructureDefinition structureDefinition = creator.createStructureDefinition(region);
             if (structureDefinition != null) {
-                Collection<Structure> structures = structureDefinition.generateStructures(seed + creator.getSalt(), region.getRegion());
+                Collection<Structure> structures = structureDefinition.generateStructures(seed + creator.getSalt(),
+                    JomlUtil.from(region.getRegion()));
 
                 for (Structure structure : structures) {
                     structure.generateStructure(new Structure.StructureCallback() {
                         @Override
-                        public void replaceBlock(Vector3i position, StructureNodeType structureNodeType, Vector3i distanceToCenter) {
-                            facet.set(creator, position, structureNodeType);
+                        public void replaceBlock(Vector3ic position, StructureNodeType structureNodeType, Vector3ic distanceToCenter) {
+                            facet.set(creator, JomlUtil.from(position), structureNodeType);
                         }
 
                         @Override
