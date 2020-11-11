@@ -49,7 +49,10 @@ public class OreRasterizer implements WorldRasterizer, WorldRasterizerPlugin {
             Map<StructureNodeType, Block> nodeTypeToBlocks = Maps.newHashMap();
             for (Vector3i position : ChunkConstants.CHUNK_REGION) {
                 StructureNodeType nodeType = oreFacet.get(oreGenCreator, position);
-                if (nodeType != null && oreGenCreator.canReplaceBlock(chunk.chunkToWorldPosition(position), chunkRegion)) {
+                if (nodeType != null
+                    && oreGenCreator.canReplaceBlock(chunk.chunkToWorldPosition(position), chunkRegion)
+                    && chunk.getBlock(position).getBlockFamily().hasCategory("rock")
+                ) {
                     if (!nodeTypeToBlocks.containsKey(nodeType)) {
                         nodeTypeToBlocks.put(nodeType, oreGenCreator.getReplacementBlock(nodeType));
                     }
