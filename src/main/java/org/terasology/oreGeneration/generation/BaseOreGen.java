@@ -16,7 +16,7 @@
 package org.terasology.oreGeneration.generation;
 
 import org.terasology.customOreGen.StructureDefinition;
-import org.terasology.math.geom.Vector3i;
+import org.joml.Vector3i;
 import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.world.generation.GeneratingRegion;
 import org.terasology.world.generation.Region;
@@ -27,8 +27,8 @@ public abstract class BaseOreGen implements CustomOreGen {
         if (!isInRange(region)) {
             return null;
         }
-        Vector3i regionSize = region.getRegion().size();
-        float scaleFactor = regionSize.getY() / 10f;
+        Vector3i regionSize = region.getRegion().getSize(new Vector3i());
+        float scaleFactor = regionSize.y() / 10f;
         StructureDefinition structureDefinition = getStructureDefinition(region, scaleFactor);
         return structureDefinition;
     }

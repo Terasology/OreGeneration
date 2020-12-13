@@ -15,7 +15,7 @@
  */
 package org.terasology.oreGeneration.generation;
 
-import org.terasology.math.geom.Vector3i;
+import org.joml.Vector3i;
 import org.terasology.oreGeneration.components.VeinsDensityOreGenComponent;
 import org.terasology.world.generation.Region;
 import org.terasology.world.generation.facets.DensityFacet;

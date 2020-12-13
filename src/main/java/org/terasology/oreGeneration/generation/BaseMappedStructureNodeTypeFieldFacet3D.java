@@ -17,10 +17,11 @@ package org.terasology.oreGeneration.generation;
 
 import com.google.common.base.Preconditions;
 import com.google.common.collect.Maps;
+import org.joml.Vector3i;
+import org.joml.Vector3ic;
 import org.terasology.customOreGen.StructureNodeType;
-import org.terasology.math.Region3i;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.oreGeneration.CustomOreGen;
+import org.terasology.world.block.BlockRegion;
 import org.terasology.world.generation.Border3D;
 import org.terasology.world.generation.facets.base.BaseFacet3D;
 
@@ -31,9 +32,9 @@ public abstract class BaseMappedStructureNodeTypeFieldFacet3D extends BaseFacet3
     private final Vector3i size;
     private Map<CustomOreGen, StructureNodeType[]> data = Maps.newHashMap();
 
-    public BaseMappedStructureNodeTypeFieldFacet3D(Region3i targetRegion, Border3D border) {
+    public BaseMappedStructureNodeTypeFieldFacet3D(BlockRegion targetRegion, Border3D border) {
         super(targetRegion, border);
-        size = getRelativeRegion().size();
+        size = getRelativeRegion().getSize(new Vector3i());
     }
 
     private StructureNodeType[] createData() {
@@ -78,8 +79,8 @@ public abstract class BaseMappedStructureNodeTypeFieldFacet3D extends BaseFacet3
     }
 
     @Override
-    public void set(CustomOreGen oreGenCreator, Vector3i pos, StructureNodeType value) {
-        set(oreGenCreator, pos.x, pos.y, pos.z, value);
+    public void set(CustomOreGen oreGenCreator, Vector3ic pos, StructureNodeType value) {
+        set(oreGenCreator, pos.x(), pos.y(), pos.z(), value);
     }
 
     @Override

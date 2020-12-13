@@ -40,7 +40,7 @@ public abstract class PocketOreGen extends BaseOreGen {
                 new PDist(component.frequency * scaleFactor, component.frequencyRange * scaleFactor),
                 new PDist(component.radius, component.radiusRange),
                 new PDist(component.thickness, component.thicknessRange),
-                new PDist(region.getRegion().sizeY() / 2, region.getRegion().sizeY() / 2),
+                new PDist(region.getRegion().getSizeY() / 2, region.getRegion().getSizeY() / 2),
                 new PDist(component.angle, component.angleRange),
                 new PDist(component.multiplier, component.multiplierRange),
                 new PDist(component.density, component.densityRange),

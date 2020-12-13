@@ -15,11 +15,11 @@
  */
 package org.terasology.oreGeneration.generation;
 
-import org.terasology.math.Region3i;
+import org.terasology.world.block.BlockRegion;
 import org.terasology.world.generation.Border3D;
 
 public class OreFacet extends BaseMappedStructureNodeTypeFieldFacet3D {
-    public OreFacet(Region3i targetRegion, Border3D border) {
+    public OreFacet(BlockRegion targetRegion, Border3D border) {
         super(targetRegion, border);
     }
 }

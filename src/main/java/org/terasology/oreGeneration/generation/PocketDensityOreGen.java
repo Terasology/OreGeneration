@@ -15,7 +15,7 @@
  */
 package org.terasology.oreGeneration.generation;
 
-import org.terasology.math.geom.Vector3i;
+import org.joml.Vector3i;
 import org.terasology.oreGeneration.components.PocketDensityOreGenComponent;
 import org.terasology.world.generation.GeneratingRegion;
 import org.terasology.world.generation.Region;
