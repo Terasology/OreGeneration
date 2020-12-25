@@ -19,8 +19,6 @@ import org.joml.Vector3ic;
 import org.terasology.customOreGen.Structure;
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
-import org.terasology.math.JomlUtil;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.oreGeneration.OreGenRegistry;
 import org.terasology.registry.CoreRegistry;
@@ -63,7 +61,7 @@ public class OreFacetProvider implements FacetProviderPlugin {
 
                         @Override
                         public boolean canReplace(int x, int y, int z) {
-                            return facet.getRelativeRegion().containsBlock(x, y, z);
+                            return facet.getRelativeRegion().contains(x, y, z);
                         }
                     });
                 }
