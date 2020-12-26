@@ -15,8 +15,9 @@
  */
 package org.terasology.oreGeneration.generation;
 
+import org.joml.Vector3ic;
 import org.terasology.customOreGen.StructureNodeType;
-import org.terasology.math.geom.Vector3i;
+import org.joml.Vector3i;
 import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.world.generation.WorldFacet3D;
 
@@ -34,7 +35,7 @@ public interface MappedStructureNodeTypeFieldFacet3D extends WorldFacet3D {
 
     void set(CustomOreGen oreGenCreator, int x, int y, int z, StructureNodeType value);
 
-    void set(CustomOreGen oreGenCreator, Vector3i pos, StructureNodeType value);
+    void set(CustomOreGen oreGenCreator, Vector3ic pos, StructureNodeType value);
 
     void setWorld(CustomOreGen oreGenCreator, int x, int y, int z, StructureNodeType value);
 
