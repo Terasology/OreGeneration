@@ -27,8 +27,7 @@ public abstract class BaseOreGen implements CustomOreGen {
         if (!isInRange(region)) {
             return null;
         }
-        Vector3i regionSize = region.getRegion().getSize(new Vector3i());
-        float scaleFactor = regionSize.y() / 10f;
+        float scaleFactor = region.getRegion().getSizeY() / 10f;
         StructureDefinition structureDefinition = getStructureDefinition(region, scaleFactor);
         return structureDefinition;
     }
