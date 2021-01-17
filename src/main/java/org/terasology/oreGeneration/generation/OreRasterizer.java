@@ -22,7 +22,6 @@ import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.oreGeneration.OreGenRegistry;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.world.block.Block;
-import org.terasology.world.block.BlockManager;
 import org.terasology.world.chunks.Chunks;
 import org.terasology.world.chunks.CoreChunk;
 import org.terasology.world.generation.Region;
@@ -41,8 +40,6 @@ public class OreRasterizer implements WorldRasterizer, WorldRasterizerPlugin {
     @Override
     public void generateChunk(CoreChunk chunk, Region chunkRegion) {
         OreFacet oreFacet = chunkRegion.getFacet(OreFacet.class);
-
-        BlockManager blockManager = CoreRegistry.get(BlockManager.class);
         OreGenRegistry oreGenRegistrySystem = CoreRegistry.get(OreGenRegistry.class);
 
         for (CustomOreGen oreGenCreator : oreGenRegistrySystem.iterateDefinitions()) {
