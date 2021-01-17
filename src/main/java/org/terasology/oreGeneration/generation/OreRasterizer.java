@@ -16,15 +16,14 @@
 package org.terasology.oreGeneration.generation;
 
 import com.google.common.collect.Maps;
+import org.joml.Vector3ic;
 import org.terasology.customOreGen.StructureNodeType;
-import org.terasology.math.JomlUtil;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.oreGeneration.OreGenRegistry;
 import org.terasology.registry.CoreRegistry;
 import org.terasology.world.block.Block;
 import org.terasology.world.block.BlockManager;
-import org.terasology.world.chunks.ChunkConstants;
+import org.terasology.world.chunks.Chunks;
 import org.terasology.world.chunks.CoreChunk;
 import org.terasology.world.generation.Region;
 import org.terasology.world.generation.WorldRasterizer;
@@ -48,10 +47,10 @@ public class OreRasterizer implements WorldRasterizer, WorldRasterizerPlugin {
 
         for (CustomOreGen oreGenCreator : oreGenRegistrySystem.iterateDefinitions()) {
             Map<StructureNodeType, Block> nodeTypeToBlocks = Maps.newHashMap();
-            for (Vector3i position : ChunkConstants.CHUNK_REGION) {
-                StructureNodeType nodeType = oreFacet.get(oreGenCreator, JomlUtil.from(position));
+            for (Vector3ic position : Chunks.CHUNK_REGION) {
+                StructureNodeType nodeType = oreFacet.get(oreGenCreator, position);
                 if (nodeType != null
-                    && oreGenCreator.canReplaceBlock(chunk.chunkToWorldPosition(JomlUtil.from(position), new org.joml.Vector3i()), chunkRegion)
+                    && oreGenCreator.canReplaceBlock(chunk.chunkToWorldPosition(position, new org.joml.Vector3i()), chunkRegion)
                     && chunk.getBlock(position).getBlockFamily().hasCategory("rock")
                 ) {
                     if (!nodeTypeToBlocks.containsKey(nodeType)) {

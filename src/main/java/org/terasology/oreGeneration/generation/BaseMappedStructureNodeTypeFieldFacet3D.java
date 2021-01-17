@@ -47,8 +47,8 @@ public abstract class BaseMappedStructureNodeTypeFieldFacet3D extends BaseFacet3
     }
 
     @Override
-    public StructureNodeType get(CustomOreGen oreGenCreator, Vector3i pos) {
-        return get(oreGenCreator, pos.x, pos.y, pos.z);
+    public StructureNodeType get(CustomOreGen oreGenCreator, Vector3ic pos) {
+        return get(oreGenCreator, pos.x(), pos.y(), pos.z());
     }
 
     @Override
@@ -57,8 +57,8 @@ public abstract class BaseMappedStructureNodeTypeFieldFacet3D extends BaseFacet3
     }
 
     @Override
-    public StructureNodeType getWorld(CustomOreGen oreGenCreator, Vector3i pos) {
-        return getWorld(oreGenCreator, pos.x, pos.y, pos.z);
+    public StructureNodeType getWorld(CustomOreGen oreGenCreator, Vector3ic pos) {
+        return getWorld(oreGenCreator, pos.x(), pos.y(), pos.z());
     }
 
     @Override

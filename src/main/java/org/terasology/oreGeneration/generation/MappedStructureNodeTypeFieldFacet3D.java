@@ -25,11 +25,11 @@ public interface MappedStructureNodeTypeFieldFacet3D extends WorldFacet3D {
 
     StructureNodeType get(CustomOreGen oreGenCreator, int x, int y, int z);
 
-    StructureNodeType get(CustomOreGen oreGenCreator, Vector3i pos);
+    StructureNodeType get(CustomOreGen oreGenCreator, Vector3ic pos);
 
     StructureNodeType getWorld(CustomOreGen oreGenCreator, int x, int y, int z);
 
-    StructureNodeType getWorld(CustomOreGen oreGenCreator, Vector3i pos);
+    StructureNodeType getWorld(CustomOreGen oreGenCreator, Vector3ic pos);
 
     StructureNodeType[] getInternal(CustomOreGen oreGenCreator);
 
