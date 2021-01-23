@@ -25,7 +25,9 @@ public interface MappedStructureNodeTypeFieldFacet3D extends WorldFacet3D {
 
     StructureNodeType get(CustomOreGen oreGenCreator, int x, int y, int z);
 
-    StructureNodeType get(CustomOreGen oreGenCreator, Vector3ic pos);
+    StructureNodeType get(CustomOreGen oreGenCreator, Vector3ic pos) {
+        return get(oreGenCreator, pos.x(), pos.y(), pos.z());
+    }
 
     StructureNodeType getWorld(CustomOreGen oreGenCreator, int x, int y, int z);
 
