@@ -45,7 +45,6 @@ public class OreFacetProvider implements FacetProviderPlugin {
 
         final OreFacet facet = new OreFacet(region.getRegion(), region.getBorderForFacet(OreFacet.class));
 
-        final GeneratingRegion finalRegion = region;
         for (final CustomOreGen creator : oreGenRegistrySystem.iterateDefinitions()) {
             StructureDefinition structureDefinition = creator.createStructureDefinition(region);
             if (structureDefinition != null) {
