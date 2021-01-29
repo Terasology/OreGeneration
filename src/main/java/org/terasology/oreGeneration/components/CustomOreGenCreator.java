@@ -15,9 +15,9 @@
  */
 package org.terasology.oreGeneration.components;
 
+import org.joml.Vector3ic;
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
-import org.terasology.math.geom.Vector3i;
 import org.terasology.world.block.Block;
 import org.terasology.world.generation.GeneratingRegion;
 import org.terasology.world.generation.Region;
@@ -31,7 +31,7 @@ public interface CustomOreGenCreator {
     /**
      * Called at rasterize time
      */
-    boolean canReplaceBlock(Vector3i worldPosition, Region region);
+    boolean canReplaceBlock(Vector3ic worldPosition, Region region);
 
     /**
      * Called at rasterize time
