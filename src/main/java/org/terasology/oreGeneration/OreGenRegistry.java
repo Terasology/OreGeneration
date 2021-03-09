@@ -15,7 +15,7 @@
  */
 package org.terasology.oreGeneration;
 
-import org.terasology.entitySystem.Component;
+import org.terasology.engine.entitySystem.Component;
 
 import java.util.function.Function;
 

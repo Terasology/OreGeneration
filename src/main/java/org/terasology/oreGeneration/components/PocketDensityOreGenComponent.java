@@ -15,7 +15,7 @@
  */
 package org.terasology.oreGeneration.components;
 
-import org.terasology.entitySystem.Component;
+import org.terasology.engine.entitySystem.Component;
 
 public class PocketDensityOreGenComponent extends BasePocketOreGenComponent implements Component {
     public int minDensity = 2;

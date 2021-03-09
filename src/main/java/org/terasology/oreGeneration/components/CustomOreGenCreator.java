@@ -18,9 +18,9 @@ package org.terasology.oreGeneration.components;
 import org.joml.Vector3ic;
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
-import org.terasology.world.block.Block;
-import org.terasology.world.generation.GeneratingRegion;
-import org.terasology.world.generation.Region;
+import org.terasology.engine.world.block.Block;
+import org.terasology.engine.world.generation.GeneratingRegion;
+import org.terasology.engine.world.generation.Region;
 
 public interface CustomOreGenCreator {
     /**

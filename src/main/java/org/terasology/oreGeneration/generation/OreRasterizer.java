@@ -18,16 +18,16 @@ package org.terasology.oreGeneration.generation;
 import com.google.common.collect.Maps;
 import org.joml.Vector3ic;
 import org.terasology.customOreGen.StructureNodeType;
+import org.terasology.engine.registry.CoreRegistry;
+import org.terasology.engine.world.block.Block;
+import org.terasology.engine.world.chunks.Chunks;
+import org.terasology.engine.world.chunks.CoreChunk;
+import org.terasology.engine.world.generation.Region;
+import org.terasology.engine.world.generation.WorldRasterizer;
+import org.terasology.engine.world.generation.WorldRasterizerPlugin;
+import org.terasology.engine.world.generator.plugin.RegisterPlugin;
 import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.oreGeneration.OreGenRegistry;
-import org.terasology.registry.CoreRegistry;
-import org.terasology.world.block.Block;
-import org.terasology.world.chunks.Chunks;
-import org.terasology.world.chunks.CoreChunk;
-import org.terasology.world.generation.Region;
-import org.terasology.world.generation.WorldRasterizer;
-import org.terasology.world.generation.WorldRasterizerPlugin;
-import org.terasology.world.generator.plugin.RegisterPlugin;
 
 import java.util.Map;
 

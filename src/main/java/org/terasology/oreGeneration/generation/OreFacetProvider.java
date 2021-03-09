@@ -19,13 +19,13 @@ import org.joml.Vector3ic;
 import org.terasology.customOreGen.Structure;
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
+import org.terasology.engine.registry.CoreRegistry;
+import org.terasology.engine.world.generation.FacetProviderPlugin;
+import org.terasology.engine.world.generation.GeneratingRegion;
+import org.terasology.engine.world.generation.Produces;
+import org.terasology.engine.world.generator.plugin.RegisterPlugin;
 import org.terasology.oreGeneration.CustomOreGen;
 import org.terasology.oreGeneration.OreGenRegistry;
-import org.terasology.registry.CoreRegistry;
-import org.terasology.world.generation.FacetProviderPlugin;
-import org.terasology.world.generation.GeneratingRegion;
-import org.terasology.world.generation.Produces;
-import org.terasology.world.generator.plugin.RegisterPlugin;
 
 import java.util.Collection;
 

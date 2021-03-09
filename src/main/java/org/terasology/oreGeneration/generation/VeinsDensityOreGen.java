@@ -16,9 +16,9 @@
 package org.terasology.oreGeneration.generation;
 
 import org.joml.Vector3i;
+import org.terasology.engine.world.generation.Region;
+import org.terasology.engine.world.generation.facets.DensityFacet;
 import org.terasology.oreGeneration.components.VeinsDensityOreGenComponent;
-import org.terasology.world.generation.Region;
-import org.terasology.world.generation.facets.DensityFacet;
 
 public class VeinsDensityOreGen extends VeinsOreGen {
     private final VeinsDensityOreGenComponent component;

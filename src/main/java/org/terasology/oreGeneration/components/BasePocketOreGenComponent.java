@@ -15,7 +15,7 @@
  */
 package org.terasology.oreGeneration.components;
 
-import org.terasology.entitySystem.Component;
+import org.terasology.engine.entitySystem.Component;
 
 public class BasePocketOreGenComponent implements Component {
     public String block;

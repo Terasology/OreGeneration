@@ -15,11 +15,11 @@
  */
 package org.terasology.oreGeneration.generation;
 
+import org.joml.Vector3i;
 import org.joml.Vector3ic;
 import org.terasology.customOreGen.StructureNodeType;
-import org.joml.Vector3i;
+import org.terasology.engine.world.generation.WorldFacet3D;
 import org.terasology.oreGeneration.CustomOreGen;
-import org.terasology.world.generation.WorldFacet3D;
 
 public interface MappedStructureNodeTypeFieldFacet3D extends WorldFacet3D {
 

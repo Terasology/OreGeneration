@@ -19,11 +19,11 @@ import org.terasology.customOreGen.PDist;
 import org.terasology.customOreGen.PocketStructureDefinition;
 import org.terasology.customOreGen.StructureDefinition;
 import org.terasology.customOreGen.StructureNodeType;
+import org.terasology.engine.registry.In;
+import org.terasology.engine.world.block.Block;
+import org.terasology.engine.world.block.BlockManager;
+import org.terasology.engine.world.generation.GeneratingRegion;
 import org.terasology.oreGeneration.components.BasePocketOreGenComponent;
-import org.terasology.registry.In;
-import org.terasology.world.block.Block;
-import org.terasology.world.block.BlockManager;
-import org.terasology.world.generation.GeneratingRegion;
 
 public abstract class PocketOreGen extends BaseOreGen {
     @In

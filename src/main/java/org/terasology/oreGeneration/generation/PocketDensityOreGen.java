@@ -16,10 +16,10 @@
 package org.terasology.oreGeneration.generation;
 
 import org.joml.Vector3i;
+import org.terasology.engine.world.generation.GeneratingRegion;
+import org.terasology.engine.world.generation.Region;
+import org.terasology.engine.world.generation.facets.DensityFacet;
 import org.terasology.oreGeneration.components.PocketDensityOreGenComponent;
-import org.terasology.world.generation.GeneratingRegion;
-import org.terasology.world.generation.Region;
-import org.terasology.world.generation.facets.DensityFacet;
 
 public class PocketDensityOreGen extends PocketOreGen {
     private final PocketDensityOreGenComponent component;

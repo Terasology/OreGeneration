@@ -15,7 +15,7 @@
  */
 package org.terasology.oreGeneration.components;
 
-import org.terasology.entitySystem.Component;
+import org.terasology.engine.entitySystem.Component;
 
 /**
  * Add this to a prefab to allow import of all CustomOreGen component triggers into the registry

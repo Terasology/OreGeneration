@@ -15,11 +15,11 @@
  */
 package org.terasology.oreGeneration.generation;
 
-import org.terasology.customOreGen.StructureDefinition;
 import org.joml.Vector3i;
+import org.terasology.customOreGen.StructureDefinition;
+import org.terasology.engine.world.generation.GeneratingRegion;
+import org.terasology.engine.world.generation.Region;
 import org.terasology.oreGeneration.CustomOreGen;
-import org.terasology.world.generation.GeneratingRegion;
-import org.terasology.world.generation.Region;
 
 public abstract class BaseOreGen implements CustomOreGen {
     @Override
