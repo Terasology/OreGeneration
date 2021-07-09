@@ -1,18 +1,5 @@
-/*
- * Copyright 2015 MovingBlocks
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2021 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
 package org.terasology.oreGeneration.components;
 
 public abstract class BaseVeinsOreGenComponent {
@@ -62,4 +49,36 @@ public abstract class BaseVeinsOreGenComponent {
     public float blockRadiusMultiplier = 1f;
     public float blockRadiusMultiplierRange = 0.1f;
  */
+
+    protected void copy(BaseVeinsOreGenComponent other) {
+        this.block = other.block;
+        this.frequency = other.frequency;
+        this.frequencyRange = other.frequencyRange;
+        this.motherLodeRadius = other.motherLodeRadius;
+        this.motherLodeRadiusRange = other.motherLodeRadiusRange;
+        this.motherlodeRangeLimit = other.motherlodeRangeLimit;
+        this.motherlodeRangeLimitRange = other.motherlodeRangeLimitRange;
+        this.branchFrequency = other.branchFrequency;
+        this.branchFrequencyRange = other.branchFrequencyRange;
+        this.branchInclination = other.branchInclination;
+        this.branchInclinationRange = other.branchInclinationRange;
+        this.branchLength = other.branchLength;
+        this.branchLengthRange = other.branchLengthRange;
+        this.branchHeightLimit = other.branchHeightLimit;
+        this.branchHeightLimitRange = other.branchHeightLimitRange;
+        this.density = other.density;
+        this.densityRange = other.densityRange;
+        this.segmentForkFrequency = other.segmentForkFrequency;
+        this.segmentForkFrequencyRange = other.segmentForkFrequencyRange;
+        this.segmentForkLengthMultiplier = other.segmentForkLengthMultiplier;
+        this.segmentForkLengthMultiplierRange = other.segmentForkLengthMultiplierRange;
+        this.segmentLength = other.segmentLength;
+        this.segmentLengthRange = other.segmentLengthRange;
+        this.segmentAngle = other.segmentAngle;
+        this.segmentAngleRange = other.segmentAngleRange;
+        this.segmentRadius = other.segmentRadius;
+        this.segmentRadiusRange = other.segmentRadiusRange;
+        this.blockRadiusMultiplier = other.blockRadiusMultiplier;
+        this.blockRadiusMultiplierRange = other.blockRadiusMultiplierRange;
+    }
 }
