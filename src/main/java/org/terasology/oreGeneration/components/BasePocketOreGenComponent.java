@@ -1,23 +1,10 @@
-/*
- * Copyright 2015 MovingBlocks
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
+// Copyright 2021 The Terasology Foundation
+// SPDX-License-Identifier: Apache-2.0
 package org.terasology.oreGeneration.components;
 
-import org.terasology.engine.entitySystem.Component;
+import org.terasology.gestalt.entitysystem.component.Component;
 
-public class BasePocketOreGenComponent implements Component {
+public class BasePocketOreGenComponent<T extends BasePocketOreGenComponent<T>> implements Component<T> {
     public String block;
     // frequency for every 10 cubed blocks
     public float frequency = 1f;
@@ -36,4 +23,25 @@ public class BasePocketOreGenComponent implements Component {
     public float noiseLevelRange = 0.2f;
     public float noiseCutoff;
     public float noiseCutoffRange;
+
+    @Override
+    public void copy(T other) {
+        this.block = other.block;
+        this.frequency = other.frequency;
+        this.frequencyRange = other.frequencyRange;
+        this.radius = other.radius;
+        this.radiusRange = other.radiusRange;
+        this.thickness = other.thickness;
+        this.thicknessRange = other.thicknessRange;
+        this.angle = other.angle;
+        this.angleRange = other.angleRange;
+        this.multiplier = other.multiplier;
+        this.multiplierRange = other.multiplierRange;
+        this.density = other.density;
+        this.densityRange = other.densityRange;
+        this.noiseLevel = other.noiseLevel;
+        this.noiseLevelRange = other.noiseLevelRange;
+        this.noiseCutoff = other.noiseCutoff;
+        this.noiseCutoffRange = other.noiseCutoffRange;
+    }
 }
