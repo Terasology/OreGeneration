@@ -7,8 +7,8 @@ public class PocketDensityOreGenComponent extends BasePocketOreGenComponent<Pock
     public int maxDensity = Integer.MAX_VALUE;
 
     @Override
-    public void copy(PocketDensityOreGenComponent other) {
-        super.copy(other);
+    public void copyFrom(PocketDensityOreGenComponent other) {
+        super.copyFrom(other);
         this.minDensity = other.minDensity;
         this.maxDensity = other.maxDensity;
     }

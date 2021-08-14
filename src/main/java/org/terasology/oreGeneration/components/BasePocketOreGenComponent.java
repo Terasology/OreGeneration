@@ -25,7 +25,7 @@ public class BasePocketOreGenComponent<T extends BasePocketOreGenComponent<T>> i
     public float noiseCutoffRange;
 
     @Override
-    public void copy(T other) {
+    public void copyFrom(T other) {
         this.block = other.block;
         this.frequency = other.frequency;
         this.frequencyRange = other.frequencyRange;

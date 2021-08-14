@@ -9,7 +9,7 @@ public class VeinsDensityOreGenComponent extends BaseVeinsOreGenComponent implem
     public int maxDensity = Integer.MAX_VALUE;
 
     @Override
-    public void copy(VeinsDensityOreGenComponent other) {
+    public void copyFrom(VeinsDensityOreGenComponent other) {
         super.copy(other);
         this.minDensity = other.minDensity;
         this.maxDensity = other.maxDensity;

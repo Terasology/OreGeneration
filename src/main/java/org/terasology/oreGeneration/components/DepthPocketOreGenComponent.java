@@ -7,8 +7,8 @@ public class DepthPocketOreGenComponent extends BasePocketOreGenComponent<DepthP
     public int maxDepth;
 
     @Override
-    public void copy(DepthPocketOreGenComponent other) {
-        super.copy(other);
+    public void copyFrom(DepthPocketOreGenComponent other) {
+        super.copyFrom(other);
         this.minDepth = other.minDepth;
         this.maxDepth = other.maxDepth;
     }
